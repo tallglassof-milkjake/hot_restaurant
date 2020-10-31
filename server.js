@@ -14,27 +14,14 @@ app.use(express.json());
 
 // Star Wars Characters (DATA)
 // =============================================================
-var characters = [
+var tables = [
   {
-    routeName: "yoda",
-    name: "Yoda",
-    role: "Jedi Master",
-    age: 900,
-    forcePoints: 2000
-  },
-  {
-    routeName: "darthmaul",
-    name: "Darth Maul",
-    role: "Sith Lord",
-    age: 200,
-    forcePoints: 1200
-  },
-  {
-    routeName: "obiwankenobi",
-    name: "Obi Wan Kenobi",
-    role: "Jedi Master",
-    age: 55,
-    forcePoints: 1350
+    routeName: "table1",
+    name: "table1",
+    bookingName: "",
+    uniqueID: "",
+    phoneNumber: " ",
+    emailAddress:"",
   }
 ];
 
@@ -51,19 +38,19 @@ app.get("/add", function(req, res) {
 });
 
 // Displays all characters
-app.get("/api/characters", function(req, res) {
-  return res.json(characters);
+app.get("/api/tables", function(req, res) {
+  return res.json(tables);
 });
 
 // Displays a single character, or returns false
-app.get("/api/characters/:character", function(req, res) {
-  var chosen = req.params.character;
+app.get("/api/tables/:table", function(req, res) {
+  var reserveTable = req.params.reserveTable;
 
-  console.log(chosen);
+  console.log(reserveTable);
 
-  for (var i = 0; i < characters.length; i++) {
-    if (chosen === characters[i].routeName) {
-      return res.json(characters[i]);
+  for (var i = 0; i < tables.length; i++) {
+    if (chosen === tables[i].routeName) {
+      return res.json(tables[i]);
     }
   }
 
@@ -71,20 +58,20 @@ app.get("/api/characters/:character", function(req, res) {
 });
 
 // Create New Characters - takes in JSON input
-app.post("/api/characters", function(req, res) {
+app.post("/api/tables", function(req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body parsing middleware
-  var newCharacter = req.body;
+  var newTable = req.body;
 
   // Using a RegEx Pattern to remove spaces from newCharacter
   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-  newCharacter.routeName = newCharacter.name.replace(/\s+/g, "").toLowerCase();
+  newTable.routeName = newTable.name.replace(/\s+/g, "").toLowerCase();
 
-  console.log(newCharacter);
+  console.log(newTable);
 
-  characters.push(newCharacter);
+  characters.push(newTable);
 
-  res.json(newCharacter);
+  res.json(newTable);
 });
 
 // Starts the server to begin listening
