@@ -39,13 +39,27 @@ app.get("/reserve", function(req, res) {
  /* res.sendFile("reserve.html"); */
 });
 
-// Displays all characters
 app.get("/tables", function(req, res) {
+  res.sendFile(path.join(__dirname, "tables.html"));
+});
+
+app.get("/api/tables", function(req, res) {
+  res.sendFile(path.join(__dirname, "tables.html"));
+});
+// Displays all characters
+app.get("/api/tables", function(req, res) {
 
   return res.json(tables);
+
+
 });
-app.post('/tables',function(req,res){
-    console.log(req.body);
+
+app.post('/tables',function(req,res){  
+  console.log(req.body);
+})
+
+app.post('/api/tables',function(req,res){  
+  req.push(tables);
 })
 
 // Displays a single character, or returns false
@@ -85,3 +99,5 @@ app.post("/tables", function(req, res) {
 app.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);
 });
+
+
